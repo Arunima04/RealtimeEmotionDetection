@@ -7,7 +7,12 @@ app = Flask(__name__)
 
 def generate_frames():
     cap = cv2.VideoCapture(0)
-    
+    if not cap.isOpened():
+        print("Error: Unable to access the camera")
+    else:
+        print("Camera is ready")
+        cap.release()
+
     while True:
         success, frame = cap.read()
         if not success:
