@@ -10,12 +10,26 @@
     <div class="container">
         <h1>Real-Time Emotion Detection</h1>
         <div class="video-container">
-            <img src="{{ url_for('video_feed') }}" alt="Live Video Feed">
+            <!-- Use video tag for live webcam feed -->
+            <video id="videoFeed" width="640" height="480" autoplay playsinline></video>
         </div>
         <div class="instructions">
             <p>This system detects emotions in real-time using your webcam.</p>
             <p>Make sure your face is clearly visible for best results.</p>
         </div>
     </div>
+
+    <script>
+        // Access the webcam
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function (stream) {
+                // Get the video element and set the source
+                var videoElement = document.getElementById('videoFeed');
+                videoElement.srcObject = stream;
+            })
+            .catch(function (error) {
+                console.error("Error accessing the camera: ", error);
+            });
+    </script>
 </body>
 </html>
